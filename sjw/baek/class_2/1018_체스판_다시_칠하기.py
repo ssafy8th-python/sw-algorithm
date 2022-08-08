@@ -37,7 +37,7 @@ for r_line in range(N-7):
                         if B_color != origin_color:
                             count += 1
         count_lst.append(count)
-        count_lst.append(64-count)      # 이 부분을 추가하면 아래 블럭을 안해도 됨
+
 
         # count = 0
         # for line in range(8):
