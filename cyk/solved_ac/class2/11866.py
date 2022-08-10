@@ -1,14 +1,26 @@
-n, k = map(int, input().split())
+# 요세푸스
+N, K = map(int, input().split())
+lst = list(range(1,N+1))
 
-# lst = list(range(1,n+1))
-# origin_lst = lst[::]
-# while True :
-#     for idx, i in enumerate(origin_lst,start=1):
-#         if idx < 3 :
-#             lst[idx+4]
+# class Queue:
+#     def __init__(self):
+#         self.items=[]
+#         self.front_index = 0
+#     def enqueue(self, val):
+#         self.items.append(val)
+#     def dequeue(self):
+#         if self.front_index == len(self.items):
+#             print('Q is empty')
+#         else :
+#             x = self.items[self.front_index]
+#             self.front_index += 1
+#             return x
+result = []
+while lst :
+    for _ in range(K-1):
+        a = lst.pop(0)
+        lst.append(a)
+    b = lst.pop(0)
+    result.append(b)
 
-
-lst = [1, 2, 3, 4, 5, 6, 7]
-three_index = 0
-    
-    
+print('<'+ ', '.join(map(str, result))+'>')
