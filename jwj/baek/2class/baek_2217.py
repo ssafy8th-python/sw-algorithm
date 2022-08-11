@@ -30,15 +30,15 @@ tmp = [0] * N
 
 for _ in range(N):
     num = int(input())
-    arr.append(num)
-    rope[num] += 1
+    arr.append(num)     # 값 10 15
+    rope[num] += 1      # 값의 개수
 
 # 리스트에 들어가 있는 개수
 for idx in range(1, 10001):
     rope[idx] += rope[idx-1]
 
 # max 값 0번째 배열의 값으로 초기화
-maxV = arr[0]
+maxV = 0
 
 # 해당하는 인덱스에 값 저장
 for num in arr:
