@@ -1,10 +1,6 @@
 N = int(input())
 
-lst = list(range(1,N+1))
+lst = list(range(2,N+1,2))
 
+print(lst)
 
-
-while len(lst)>1 :
-    lst[2:].append(lst[1])
-    
-print(lst[0])
