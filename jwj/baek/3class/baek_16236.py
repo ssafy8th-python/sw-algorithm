@@ -3,74 +3,80 @@ from collections import deque
 
 input = sys.stdin.readline
 
-def bfs():
-    que = deque()
-    que.append((position[0], position[1], 0))
-    
-    while que:
-        x, y, cnt = que.popleft()
-        if target[0] == x and target[1] == y:
-            return cnt
 
-        for i in range(4):
-            x_i = x + x_idx[i]
-            y_i = y + y_idx[i]
-            
-            if (0 <= x_i < N) and (0 <= y_i < N) and (sea[x_i][y_i] <= size) and visited[x_i][y_i]:
-                visited[x_i][y_i] = 0
-                que.append((x_i, y_i, cnt+1))
-                visited[x_i][y_i] = 1
+def bfs():
+    global can_eat, min_cnt
+    visited = [[False] * N for i in range(N)]
+    visited[position[0]][position[1]] = True
+
+    d_que = deque()
+    d_que.append((position[0], position[1], 0))
+    distance = []
+
+    while d_que:
+        x, y, cnt = d_que.popleft()
+
+        for idx in t_idx:
+            x_next = x + idx[0]
+            y_next = y + idx[1]
+
+            if 0 <= x_next < N and 0 <= y_next < N and not visited[x_next][y_next]:
+                if sea[x_next][y_next] <= size:
+                    visited[x_next][y_next] = True
+                    if 0 < sea[x_next][y_next] < size:
+                        min_cnt = cnt
+                        distance.append((cnt+1, x_next, y_next))
+
+                    if cnt+1 <= min_cnt:
+                        d_que.append((x_next, y_next, cnt + 1))
+
+    if distance:
+        distance.sort()
+        return distance[0]
+
+    else:
+        return False
 
 N = int(input())
 
 sea = []
-position = [0, 0]
-x_idx = [-1, 0, 1, 0]
-y_idx = [ 0, -1, 0, 1]
+position = []
 size = 2
-size_cnt = 0
+eat = 0
 time = 0
-target = [0, 0]
-visited = [[1] * N for _ in range(N)]
-for i in range(N):
-    tmp_lst = list(map(int, input().split()))
-    sea.append(tmp_lst)
-    for idx, num in enumerate(tmp_lst):
-        if num == 9:
-            position = [i, idx]
-        
-while True:
-    min_cnt = 2000000
-    cnt = 0
+fish_cnt = 0
+min_cnt = 400
 
-    last_target = [-1, -1]
 
-    for i in range(N):
-        for j in range(N):
-            if sea[i][j] != 0 and sea[i][j] < size:
-                target = [i, j]
-                cnt = bfs()
-                if min_cnt > cnt:
-                    last_target = [i, j]
-                    min_cnt = cnt
+t_idx = [[0, -1], [-1, 0], [0, 1], [1, 0]]
 
-    sea[position[0]][position[1]] = 0
-    position = [last_target[0], last_target[1]]
-    sea[position[0]][position[1]] = 9
+for idx in range(N):
+    sea.append(list(map(int, input().split())))
+    for j in range(N):
+        if 0 < sea[idx][j] <= 6:
+            fish_cnt += 1
+        if sea[idx][j] == 9:
+            position = [idx, j]
 
-    size_cnt += 1
+sea[position[0]][position[1]] = 0
 
-    if size == size_cnt:
-        size += 1
-        size_cnt = 0
+while fish_cnt:
+    min_cnt = 400
 
-    if cnt == 0:
+    result = bfs()
+    if not result:
         break
-    
-    time += min_cnt
 
+    time += result[0]
+    eat += 1
+    fish_cnt -= 1
+
+    position = [result[1], result[2]]
+    sea[result[1]][result[2]] = 0
+
+    if size == eat:
+        size += 1
+        eat = 0
 
 
 print(time)
-
-
