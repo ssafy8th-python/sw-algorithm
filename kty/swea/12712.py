@@ -2,42 +2,39 @@ import sys
 
 sys.stdin = open("input_12712.txt", "r")
 
-TC = int(input())
-for tc in range(1, TC+1):
+T = int(input())
+for tc in range(1, T+1):
     N, M = map(int, input().split())
-    BRD = [list(map(int, input().split())) for _ in range(N)]
+    arr = [list(map(int, input().split())) for _ in range(N)]
 
-    # print(BRD)
-    dr = [1, -1, 0, 0, 1, 1, -1, -1]
-    dc = [0, 0, 1, -1, 1, -1, 1, -1]
+    # 0~3 : 오, 아, 왼, 위 , 4~7 : 오위, 오아, 왼아, 왼위
+    dr = [0, 1, 0, -1, -1, 1, 1, -1]
+    dc = [1, 0, -1, 0, 1, 1, -1, -1]
 
-    maxV = 0
-    for row in range(N):
-        for col in range(N):
-            # 사방면
-            sumV = BRD[row][col]
-            for direction in range(4, 8):
-                for distance in range(1, M):
-                    newR = row + dr[direction] * distance
-                    newC = col + dc[direction] * distance
+    max_flies = 0
+    for i in range(N):
+        for j in range(N):
+            sum = arr[i][j] # 중앙값 초기화
+            for k in range(0, 4): # 상하좌우 확인
+                for d in range(1, M): # M의 범위만큼 스프레이 길이 늘어남
+                    ni = i + dr[k] * d
+                    nj = j + dc[k] * d
+                    if 0 <= ni < N and 0 <= nj < N:
+                        sum += arr[ni][nj]
 
-                    if 0<=newR<N and 0<=newC<N:
-                        sumV += BRD[newR][newC]
-            if maxV < sumV:
-                maxV = sumV
-                # print('1', row, col, sumV)
+            if max_flies < sum:
+                max_flies = sum
 
             # 대각선 확인
-            sumV = BRD[row][col]
-            for direction in range(4, 8):
-                for distance in range(1, M):
-                    newR = row + dr[direction] * distance
-                    newC = col + dc[direction] * distance
+            sum = arr[i][j] # 중앙값 초기화
+            for k in range(4, 8):
+                for d in range(1, M):
+                    ni = i + dr[k] * d
+                    nj = j + dc[k] * d
+                    if 0 <= ni < N and 0 <= nj < N:
+                        sum += arr[ni][nj]
 
-                    if 0<=newR<N and 0<=newC<N:
-                        sumV += BRD[newR][newC]
+            if max_flies < sum:
+                max_flies = sum
 
-            if maxV < sumV:
-                maxV = sumV
-                # print('2, row, col, sumV)
-    print(f'#{tc} {maxV}')
+    print(f'#{tc} {max_flies}')
