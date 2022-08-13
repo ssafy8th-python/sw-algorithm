@@ -63,3 +63,90 @@
 # print()
 
 # print(1 << 0)
+
+# string reverse
+#
+# def rev(s):
+#     for idx in range(len(s)//2):
+#         s[idx], s[len(s)-idx-1] = s[len(s)-idx-1], s[idx]
+#
+#
+# s = "abcd"
+# s = list(s)
+#
+# rev(s)
+#
+# s = ''.join(s)
+#
+# print(s)
+#
+#
+# def my_strcmp(str1, str2) :
+#     i = 0
+#     while (str1[i] != '\0'):
+#         if (str1 != str2[i]):
+#             break
+#         i += 1
+#
+#     return (ord(str1[i]) - ord(str2[i]))
+#
+
+# ==============itoa 함수 구현==============
+#
+# print(my_strcmp('abcd', 'b'))
+# print(my_strcmp( 'b', 'abcd'))
+# print(my_strcmp('abcd', 'abcd'))
+#
+# def itoa(number):
+#     minus = False
+#     if number < 0:
+#         minus = True
+#
+#     if minus:
+#         number *= -1
+#
+#     i = []
+#     while number != 0:
+#         i.append(number%10)
+#         number //= 10
+#
+#     res = ''
+#     for idx in range(len(i)-1, -1, -1):
+#         res +=  chr(i[idx] + ord('0'))
+#
+#     if minus:
+#         res = '-' + res
+#
+#     return res
+#
+# print(itoa(123))
+# print(itoa(3214))
+# print(itoa(-321))
+
+# ================찾으면 패턴의 시작위치를 return 못찾으면 -1을 return 하는 함수================
+
+
+def find(t, p):
+    i = j = 0
+
+    while i < N and j < M:
+        if t[i] != p[j]:
+            i = i - j + 1
+            j = 0
+        else:
+            i += 1
+            j += 1
+
+    if j == M:
+        return i - M
+    else:
+        return -1
+
+
+t = 'a patern matching algorithm test'
+p = 'rithm'
+N = len(t)
+M = len(p)
+
+print(find(t, p))
+

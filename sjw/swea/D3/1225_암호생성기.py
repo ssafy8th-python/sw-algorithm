@@ -18,3 +18,22 @@ for _ in range(10):
 
     print(f'#{n}', end=' ')
     print(*num_lst)
+
+
+# def encoding(li, k):
+#     if k == 6:
+#         k = 1
+#     if li[0] - k <= 0:
+#         li = li[1:] + [0]
+#         return li
+#     else:
+#         return encoding(li[1:] + [li[0] - k], k + 1)
+#
+#
+# for tc in range(10):
+#     N = int(input())
+#     result = list(map(int, input().split()))
+#
+#     possible_cycle = min(result) // 15
+#     cycle_done = [result[i] - 15 * (possible_cycle - 1) for i in range(len(result))]
+#     print("#{} {}".format(N, " ".join(map(str, encoding(cycle_done, 1)))))
