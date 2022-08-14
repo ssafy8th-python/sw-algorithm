@@ -5,18 +5,15 @@
 # 큐에 대해 공부 후에 풀 것
 
 import sys
+from collections import deque
 input = sys.stdin.readline
 
-N = int(input())
 
-if N % 2:
-    M = [i for i in range(2, N - 2, 2)]
-    N = [N - 1] + M
-else:
-    N = [i for i in range(2, N + 1, 2)]
+N = deque(list(i for i in range(1, int(input()) + 1)))
 
-while len(N) != 1:
-    N.remove(N[0])
-    N.append(N.pop(0))
+cnt = 1
+while len(N) > 1:
+        N.popleft()
+        N.append(N.popleft())
+
 print(N[0])
-
