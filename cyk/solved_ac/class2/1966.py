@@ -31,4 +31,4 @@ for i in range(T):
                 M += (len(q)-1)
             else:
                 M -= 1
-    print(cnt+1)
+    print(cnt)
