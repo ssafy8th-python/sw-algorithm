@@ -31,18 +31,18 @@
 # [제출한 답1]
 
 # T = int(input())
-
+#
 # for i in range(1, T + 1):
-
-#     N, M = map(int,input().split())
+#
+#     N, M = map(int, input().split())
 #     Ai = list(map(int, input().split()))
 #     Bj = list(map(int, input().split()))
-
-#     if M >= N :
+#
+#     if M >= N:
 #         a = M - N
 #         b = 0
 #         d = []
-        
+#
 #         for j in range(0, a + 1):
 #             for k in range(0, N):
 #                 c = int(Ai[k]) * (Bj[k + j])
@@ -50,12 +50,12 @@
 #             d.append(b)
 #             b = 0
 #         print(f'#{i} {max(d)}')
-
+#
 #     else:
 #         a = N - M
 #         b = 0
 #         d = []
-        
+#
 #         for j in range(0, a + 1):
 #             for k in range(0, M):
 #                 c = int(Bj[k]) * (Ai[k + j])

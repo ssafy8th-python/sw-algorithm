@@ -20,7 +20,7 @@ for test_case in range(1, T + 1):
         if i in open_it:
             stack.append(i)
         else:
-            if close_it.index(i) == open_it.find(stack[-1]):
+            if len(stack) != 0 and close_it.index(i) == open_it.find(stack[-1]):
                 stack.pop()
             else:
                 flag = False
