@@ -6,15 +6,26 @@ import sys
 input = sys.stdin.readline
 
 
-def parametric():
-    pass
+def parametric(n, arr):
+    start = 1
+    end = arr[-1]
+    while start <= end:
+        mid = (start + end) // 2
+        cnt = 0
+        for i in arr:
+            cnt += i // mid
+        if cnt >= n:
+            start = mid + 1
+        else:
+            end = mid - 1
+
+    return end
 
 
+K, N = map(int, input().split())
 
-k, n = map(int, input().split())
-
-k_lst = [int(input) for _ in range(k)]
-
+k_lst = [int(input()) for _ in range(K)]
+k_lst.sort()
 
 
-print()
+print(parametric(N, k_lst))
