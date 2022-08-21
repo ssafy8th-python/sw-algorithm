@@ -1,3 +1,7 @@
+# 11723 집합
+# 주소: https://www.acmicpc.net/problem/11723
+
+# 제출한 답
 import sys
 input = sys.stdin.readline
 
