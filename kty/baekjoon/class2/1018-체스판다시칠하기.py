@@ -7,7 +7,8 @@ w_start = [['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'],
            ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'],
            ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'],
            ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'],
-           ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B']]
+           ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'],
+           ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W']]
 
 b_start = [['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'],
            ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'],
@@ -15,7 +16,8 @@ b_start = [['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'],
            ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'],
            ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'],
            ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'],
-           ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W']]
+           ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'],
+           ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B']]
 
 result = []
 for a in range(N-7):
@@ -24,9 +26,9 @@ for a in range(N-7):
         cnt_b = 0
         for i in range(a, a+8):
             for j in range(b, b+8):
-                if chess[i][j] != w_start[i][j]:
+                if chess[i][j] != w_start[i-a][j-b]:
                     cnt_w += 1
-                if chess[i][j] != b_start[i][j]:
+                if chess[i][j] != b_start[i-a][j-b]:
                     cnt_b += 1
 
         result.append(cnt_w)
