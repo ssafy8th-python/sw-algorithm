@@ -37,6 +37,8 @@ for i in range(0, max(ground) + 1):
 
 print(time, height)
 
+
+
 # 다른 답
 import sys
 input = sys.stdin.readline
