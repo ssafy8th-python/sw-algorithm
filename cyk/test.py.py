@@ -86,17 +86,17 @@
 # print(myStr(-321))
 
 # 찾으면 위치 패턴의 시작 위치를 return하고 못찾으면 -1을 return
-def find(t, p):
-    N = len(t)
-    M = len(p)
-    for i in range(N-M+1):
-        if t[i:i+M] == p:
-            return i
-    else :
-        return -1
-
-t = 'a pattern matching algorithm test'
-p = 'a pattern'
-print(find(t,p))
+# def find(t, p):
+#     N = len(t)
+#     M = len(p)
+#     for i in range(N-M+1):
+#         if t[i:i+M] == p:
+#             return i
+#     else :
+#         return -1
+#
+# t = 'a pattern matching algorithm test'
+# p = 'a pattern'
+# print(find(t,p))
 
 

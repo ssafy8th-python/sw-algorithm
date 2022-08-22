@@ -43,3 +43,34 @@ for tc in range(1, 1+T):
         print(0)
     else:
         print(1)
+
+# def check(arr):
+#     for lst in arr:
+#         check_lst = [0] * 10
+#         for elem in lst:
+#             check_lst[elem] += 1
+#             if 2 in check_lst:
+#                 return 0
+#
+#     return 1
+#
+# T = int(input())
+#
+# for tc in range(1, T+1):
+#     arr = [list(map(int, input().split())) for _ in range(9)]
+#     vert_arr = list(zip(*arr))
+#     grid =[]
+#     for i in range(0, 9, 3):
+#         for j in range(0,9,3):
+#             temp = []
+#             for k in range(3):
+#                 for t in range(3):
+#                     temp.append(arr[i+k][j+t])
+#             grid.append(temp)
+#     result = [check(arr), check(vert_arr), check(grid)]
+#     print(f'#{tc} ', end='')
+#
+#     if 0 in result:
+#         print(0)
+#     else:
+#         print(1)
