@@ -18,30 +18,25 @@ lst = [int(input()) for _ in range(N)]      # 만들어야 하는 수열 [4, 3, 
 num_lst = list(range(1, N+1))
 st = []
 result = []
-while True:
-    if len(st) > 1 and st == lst:
-        result.append(0)
-        break
-    if st:
-        if st[-1] != lst[0]:
-            st.append(num_lst[0])
-            num_lst.pop(0)
-            result.append('+')
 
-    else:
-        st.append(num_lst[0])
-        num_lst.pop(0)
-        result.append('+')
 
-    if st[-1] == lst[0]:
-        x = st.pop()
-        lst.pop(0)
-        result.append('-')
+idx = 0
+while idx < N:
+    st.append(num_lst[idx])
+    result.append('+')
 
-    if not lst:
-        break
+    while True:
+        if st[-1] == lst[0]:
+            st.pop()
+            lst.pop(0)
+            result.append('-')
+        else:
+            break
+        if not st:
+            break
+    idx += 1
 
-if 0 in result:
+if st:      # st에 요소가 남아있으면 no 출력
     print('NO')
 else:
     for elem in result:
