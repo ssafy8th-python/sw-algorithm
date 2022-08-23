@@ -6,9 +6,9 @@ import sys
 input = sys.stdin.readline
 
 
-def parametric(n, arr):
-    start = 1
-    end = arr[-1]
+def parametric(n, arr):                      # 매개 변수 탐색으로 풀이
+    start = 1                                # 확실한 것 중 가장 큰 값
+    end = arr[-1]                            # 적당히 큰 값
     while start <= end:
         mid = (start + end) // 2
         cnt = 0

@@ -79,4 +79,3 @@ while True:
         end = mid-1
 
 print(min_time, prev_height)
-
