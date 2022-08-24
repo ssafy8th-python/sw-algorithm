@@ -1,51 +1,45 @@
 # # 자기 방으로 돌아가기
-# '''
-# 3
-# 4
-# 10 20
-# 30 40
-# 50 60
-# 70 80
-# 2
-# 1 3
-# 2 200
-# 3
-# 10 100
-# 20 80
-# 30 50
-# '''
-for tc in range(1, 2):
-    dump = int(input())
-    s = list(map(int, input().split()))
+'''
+3
+4
+10 20
+30 40
+50 60
+70 80
+2
+1 3
+2 200
+3
+10 100
+20 80
+30 50
 
-    maxv = 0
-    minv = 101
+1
+4
+10 20
+30 40
+50 60
+70 80
+'''
 
-    for elem in s[1:]:
-        if minv > elem:
-            minv = elem
-        if maxv < elem:
-            maxv = elem
 
-    lst = [0] * (maxv + 1)
-
-    for value in s:
-        lst[value] += 1
-
-    for i in range(dump):
-        lst[minv] -= 1
-        lst[minv + 1] += 1
-        lst[maxv] -= 1
-        lst[maxv - 1] += 1
-
-        if lst[maxv] == 0:
-            maxv -= 1
-        if lst[minv] == 0:
-            minv += 1
-
-        res = maxv - minv
-        if res < 2:
-            break
-    print(lst)
-    print(f'#{tc} {res}')
-
+T = int(input())
+for tc in range(1, 1+T):
+    n = int(input())
+    room = [0] * 201
+    for _ in range(n):
+        s, e = map(int, input().split())
+        if s > e:
+            s, e = e, s
+        if s % 2:
+            s = 1+s//2
+        else:
+            s= s//2
+        if e % 2:
+            e = 1 + e // 2
+        else:
+            e = e // 2
+        for i in range(s, e+1):
+            room[i] += 1
+    print(room)
+    print(f'#{tc} {max(room)}')
