@@ -20,14 +20,13 @@ for tc in range(1, T+1):
 
     que.append((start, 0))
     minV = 50
-
     while que:
         v, cnt = que.popleft()
         visited[v] = True
 
         if v == end:
-            if minV > cnt:
-                minV = cnt
+            minV = cnt
+            break
 
         for w in graph[v]:
             if not visited[w]:
@@ -35,5 +34,4 @@ for tc in range(1, T+1):
 
     if minV == 50:
         minV = 0
-
     print(f'#{tc} {minV}')
