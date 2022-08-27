@@ -1,25 +1,33 @@
-from collections import deque
 
+def dfs(i, j, cnt, dist, n):
+    global minV
 
-def bfs():
-    visited = [[0] * N for _ in range(N)]
-    visited[0][0] = 1
-    q = deque()
-    q.append((0, 0))
+    if minV < dist:
+        return
 
-    while q:
-        i, j = q.popleft()
+    if cnt == 0:
+        if minV > dist:
+            minV = dist
+    else:
+        for idx in range(1, (n // 2) + 1):
+            if not monster[idx][0]:
+                monster[idx][0] = 1
+                p_x, p_y = monster[idx][1], monster[idx][2]
+                sumV = abs(i-p_x) + abs(j-p_y)
+                dist += sumV
+                dfs(p_x, p_y, cnt - 1, dist, n)
+                dist -= sumV
+                monster[idx][0] = 0
 
-        for d_x, d_y in ((1, 0), (-1, 0), (0, -1), (0, 1)):
-            n_x, n_y = i + d_x, j + d_y
-
-            if 0 <= n_x < N and 0 <= n_y < N and not visited[n_x][n_y]:
-                q.append((n_x, n_y))
-                visited[n_x][n_y] = visited[i][j] + 1
-                if maps[n_x][n_y] != 0:
-                    print(maps[n_x][n_y])
-                    print(visited[n_x][n_y] - 1)
-
+            if monster[idx][0] and not monster[-idx][0]:
+                monster[-idx][0] = 1
+                p_x, p_y = monster[-idx][1], monster[-idx][2]
+                sumV = abs(i-p_x) + abs(j-p_y)
+                dist += sumV
+                dfs(p_x, p_y, cnt - 1, dist, n)
+                dist -= sumV
+                monster[-idx][0] = 0
+    
 
 T = int(input())
 
@@ -30,8 +38,20 @@ for tc in range(1, T+1):
 
     maps = [list(map(int, input().split())) for _ in range(N)]
 
-    monster = []
+    monster = [[] for _ in range(9)]
 
-    bfs()
+    monster_cnt = 0
 
-    print(f'#{tc}')
+    minV = 100000
+
+    for i in range(N):
+        for j in range(N):
+            if maps[i][j] != 0:
+                monster[maps[i][j]].append(0)
+                monster[maps[i][j]].append(i)
+                monster[maps[i][j]].append(j)
+                monster_cnt += 1
+
+    dfs(x, y, monster_cnt, 0, monster_cnt)
+
+    print(f'#{tc} {minV}')
