@@ -2,6 +2,7 @@
 # 주소: https://www.acmicpc.net/problem/2304
 
 # 제출한 답
+
 import sys
 input = sys.stdin.readline
 
