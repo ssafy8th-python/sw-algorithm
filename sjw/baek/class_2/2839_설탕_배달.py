@@ -13,3 +13,4 @@ if minv == 100000000:
     minv = -1
 
 print(minv)
+
