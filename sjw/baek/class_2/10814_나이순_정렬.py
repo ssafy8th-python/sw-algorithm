@@ -2,26 +2,26 @@
 # 주소: https://www.acmicpc.net/problem/10814
 
 # 제출한 답         import안하면 완전 느리게 나옴
-# import sys
-# input = sys.stdin.readline
+import sys
+input = sys.stdin.readline
 
-# n = int(input())
+n = int(input())
 
-# data = {}
+data = {}
 
-# for _ in range(n):
-#     x, y = input().split()
-#     x = int(x)
-#     if x in data:
-#         data[x].append(y)
-#     else:
-#         data[x] = [y]
+for _ in range(n):
+    x, y = input().split()
+    x = int(x)
+    if x in data:
+        data[x].append(y)
+    else:
+        data[x] = [y]
 
-# data = sorted(data.items(), key= lambda x : int(x[0]))
+data = sorted(data.items(), key=lambda x: int(x[0]))
 
-# for i in data:
-#     for j in i[1]:
-#         print(i[0], j)
+for i in data:
+    for j in i[1]:
+        print(i[0], j)
 
 
 # 다른 답
