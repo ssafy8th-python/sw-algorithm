@@ -7,7 +7,7 @@
 101011
 111011
 '''
-def dfs(srow, scol, N, M):
+def bfs(srow, scol, N, M):
     visited = [[0]*M for _ in range(N)]
     q = []
     q.append((srow, scol))
@@ -25,4 +25,4 @@ def dfs(srow, scol, N, M):
 N, M = map(int, input().split())
 maze = [list(map(int, list(input()))) for _ in range(N)]
 srow, scol = 0, 0                        # 출발 (1,1)=>(0,0)
-print(dfs(srow, scol, N, M))
+print(bfs(srow, scol, N, M))
