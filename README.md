@@ -1,6 +1,7 @@
 # sw-algorithm
 - [DFS](#dfsdepth-first-search)
 - [Dijkstra](#dijkstra)
+- [Bellman-Ford](#bellman-ford)
 
 ## DFS(Depth First Search)
 
@@ -206,3 +207,62 @@ while True:
     print(f"Problem {test_case}: {dijkstra(0, 0)}")
 
 ```
+
+## Bellman-Ford
+
+### 사용되는 문제 유형
+- 음수 가중치를 포함하고 있는 그래프에서 최단 거리를 구하는 경우
+- 음수 사이클의 존재 여부를 파악할 수 있다.
+
+
+### 구현 방법
+1. 시작 노드 설정
+2. 각 노드의 거리 값을 무한대로 설정하고 시작노드는 0으로 설정
+3. 무한대로 설정되어 있지 않은 현제 노드에서 모든 인접 노드를 탐색하여 더 짧은 거리인 경우 값을 갱신
+4. 3번 과정을 모든 노드에 대해 수행
+5. 노드의 수만큼 실행 했을 때 거리가 갱신된다면 음수 사이클이 존재함을 알 수 있음
+
+```
+'''
+input
+
+3 3
+1 2 3
+2 3 4
+3 1 -8
+
+'''
+
+INF = int(1e9)
+
+
+def bellman_ford(start):
+    distance = [INF] * (V + 1)
+    distance[start] = 0
+
+    # 한번더 반복하여 값의 변화 유무에 따라 음수 싸이클인지 확인
+    for i in range(V):
+        for s, e, w in edges:
+            if distance[s] != INF and distance[e] > distance[s] + w:
+                if i == V - 1:
+                    return distance
+
+                distance[e] = distance[s] + w
+
+    return distance
+
+
+V, E = map(int, input().split())     # N = node, M = edge
+
+edges= []
+
+for _ in range(E):
+    s, e, w = map(int, input().split())
+    edges.append((s, e, w))
+
+res = bellman_ford(1)
+print(res)
+
+# [1000000000, -2, 2, 6]
+```
+
