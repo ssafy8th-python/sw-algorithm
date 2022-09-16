@@ -1,61 +1,36 @@
-from collections import deque
-
-T = int(input())
-
-costs = [0] * 41
+costs = [0]
 
 for k in range(1, 41):
-    costs[k] = k * k + (k - 1) * (k - 1)
+    costs.append(k * k + (k - 1) * (k - 1))
 
 
-def bfs(x, y):
-    visited = [[False] * N for _ in range(N)]
-
-    visited[x][y] = True
-    house = 0
-    result = 0
-
-    cur_num = 2
-
-    if city[x][y] == '1':
-        house += 1
-        result += 1
-
-    q = deque()
-    q.append((x, y, 1))
-
-    while q:
-        c_i, c_j, k= q.popleft()
-
-        if cur_num == k:
-            cur_num += 1
-            if costs[cur_num - 1] <= house * M:
-                result = house
-
-        for d_i, d_j in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-            n_i, n_j = c_i + d_i, c_j + d_j
-            if 0 <= n_i < N and 0 <= n_j < N and not visited[n_i][n_j]:
-                if city[n_i][n_j] == '1':
-                    house += 1
-
-                q.append((n_i, n_j, k+1))
-                visited[n_i][n_j] = True
-
-    return result
+def find(row, col):
+    dis = [0] * (2 * N + 1)
+    for hRow, hCol in homes:
+        # 시작지점으로부터 home까지의 거리를 계산하여 (dis에 count)
+        t = abs(hRow - row) + abs(hCol - col)
+        dis[t] += 1
+    maxNum = 0
+    for k in range(1, 2 * N + 1):
+        numH = sum(dis[:k])
+        if numH * M - costs[k] >= 0 and maxNum < numH:
+            maxNum = numH
+    return maxNum
 
 
-for test_case in range(1, T+1):
+TC = int(input())
+for test_case in range(1, TC + 1):
     N, M = map(int, input().split())
-
-    city = [input().split() for _ in range(N)]
-
-    answer = 0
-
-    for i in range(N):
-        for j in range(N):
-            result = bfs(i, j)
-
-            if answer < result:
-                answer = result
-
-    print(f'#{test_case} {answer}')
+    city = [list(map(int, input().split())) for i in range(N)]
+    homes = []
+    maxV = 0
+    for row in range(N):
+        for col in range(N):
+            if city[row][col] == 1:
+                homes.append((row, col))
+    for row in range(N):
+        for col in range(N):
+            result = find(row, col)
+            if maxV < result:
+                maxV = result
+    print(f'#{test_case}', maxV)
