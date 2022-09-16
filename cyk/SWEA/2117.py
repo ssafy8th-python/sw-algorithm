@@ -1,6 +1,6 @@
 # 홈 방범 서비스
-# import sys
-# sys.stdin = open("sample_input (3).txt", "r")
+import sys
+sys.stdin = open("sample_input (3).txt", "r")
 '''
 1
 7 7
@@ -20,15 +20,19 @@ def find(row, col):
     for hRow, hCol in HOMES:
         t = abs(hRow-row) +abs(hCol-col)
         dis[t] += 1
-
-    for k in range(2*N):
-        if 손해가 아닌경우 최대를 구해서 return
-
+    maxNum = 0
+    for k in range(1, 2*N+1):
+        numH = sum(dis[:k])
+        if numH * M - (k*k +(k-1)*(k-1)) >= 0 and maxNum < numH:
+            maxNum = numH
+    return maxNum
 T = int(input())
 for tc in range(1, 1+T):
     N, M = map(int, input().split())
     arr = [list(map(int, input().split())) for _ in range(N)]
     HOMES = []
+    maxV =0
+
     for r in range(N):
         for c in range(N):
             if arr[r][c] == 1:
@@ -39,3 +43,4 @@ for tc in range(1, 1+T):
             result = find(row, col)
             if maxV < result:
                 maxV = result
+    print(f'#{tc} {maxV}')
