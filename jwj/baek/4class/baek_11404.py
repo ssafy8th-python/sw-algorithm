@@ -27,5 +27,8 @@ for m in range(1, n+1):
 
 for i in distance[1:]:
     for j in i[1:]:
-        print(j, end=" ")
+        if j == INF:
+            print('0', end=" ")
+        else:
+            print(j, end=" ")
     print()
