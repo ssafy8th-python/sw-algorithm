@@ -5,7 +5,6 @@ T = int(input())
 def f(k):
     global res
     if k == n:       # n개의 구역 순회 완료
-        # print(result+[1])
         res.append(result+[0])
         return
     for i in range(n):
@@ -33,7 +32,7 @@ for tc in range(1, 1+T):
             mn = tmp
     print(f'#{tc} {mn}')
 
-    
+
 # 다른 풀이
 T = int(input())
 

@@ -4,7 +4,7 @@ sys.stdin = open("sample_input (7).txt","r")
 def f(k, r, c, midSum):
     global result
 
-    if result <= midSum:
+    if result <= midSum:    # 중간계산값이 result보다 크다면 빠져나가기
         return
 
     if r == n-1 and c == n-1:
