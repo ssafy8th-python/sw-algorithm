@@ -6,37 +6,32 @@ import sys
 input = sys.stdin.readline
 
 
+# 범위안에 안들면 (er - sr) * (ec - sc) 만큼 cnt에 더하고 return
 def Z(sr, er, sc, ec):
     global cnt, result
+    if not sr <= r <= er or not sc <= c <= ec:
+        cnt += (er - sr) * (ec - sc)
+        return
     if result:
         return
 
-    if er - sr == 1:
+    if (er - sr) == 1:
         cnt += 1
         if sr == r and sc == c:
-            result = cnt
+            result += cnt
         return
 
-    mid = (er - 1 + sr) // 2
-2 3 4 5
-    Z(sr, mid, sc, mid)
-    Z(sr, mid, mid, ec)
-    Z(mid, er, sc, mid)
-    Z(mid, er, mid, ec)
+    rmid = (er + sr) // 2
+    cmid = (ec + sc) // 2
+
+    Z(sr, rmid, sc, cmid)
+    Z(sr, rmid, cmid, ec)
+    Z(rmid, er, sc, cmid)
+    Z(rmid, er, cmid, ec)
 
 
 N, r, c = map(int, input().split())
-board = [[0] * 2 ** N for _ in range(2 ** N)]
-cnt, result = 0, 0
+cnt, result = -1, 0
 
 Z(0, 2 ** N, 0, 2 ** N)
 print(result)
-
-
-# 재귀로 나눠서 들가부리기
-# 들가서 len이 1이면 cnt += 1
-# r: [0:mid] [0:mid]
-# c: [0:mid] [mid:N]
-
-# r: [mid:N]  [mid:N]
-# c: [0:mid] [mid:N]
