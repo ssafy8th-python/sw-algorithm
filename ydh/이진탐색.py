@@ -1,25 +1,65 @@
 import sys
 sys.stdin=open("이진탐색.txt", "r")
 
-# 중위 순회
-def inorder(node):
+def partition(L, R) :
+    p = L
+    i = L + 1
+    j = R
+
+    while i <= j :
+        while i <= j and arr[i] <= arr[p] :
+            i += 1
+        while i <= j and arr[j] > arr[p] :
+            j -= 1
+        if i < j :
+            arr[i], arr[j] = arr[j], arr[i]
+
+    arr[p], arr[j] = arr[j], arr[p]
+    return j
+
+def quick_s(L, R) :
+    if L < R :
+        p = partition(L, R)
+        quick_s(L, p-1)
+        quick_s(p+1, R)
+        # print(arr)
+
+def binarySearch(N, arr, key) :
     global cnt
-
-    if node <= N:
-        inorder(node * 2)   # 왼쪽 노드
-        arr[node] = cnt    # 왼쪽 다 다녀 왔으면 값 넣어
-        cnt += 1           # 값 하나 추가
-        inorder((node * 2) + 1) # 오른쪽 노드
-
+    low = 0
+    high = N - 1
+    flag = 0
+    while low <= high :
+        mid = (low + high) // 2
+        if arr[mid] == key :            # 중앙
+            cnt += 1
+            return
+        if arr[mid] > key :           # 왼쪽
+            high = mid - 1
+            if flag != 1 :
+                flag = 1
+            else :
+                return
+        else :                          # 오른쪽
+            low = mid + 1
+            if flag != 2 :
+                flag = 2
+            else :
+                return
+    return
 
 T = int(input())
 
-for tc in range(1, T+1):
-    N = int(input()) # 이진 탐색 트리에 저장할 노드 개수
+for tc in range(1, T+1) :
+    N, M = map(int, input().split())
+    arr = sorted(list(map(int, input().split())))
+    B = list(map(int, input().split()))
+    # print(arr)
+    # quick_s(0, len(arr)-1)
+    # print(arr)
+    cnt = 0
+    for i in B :
+        # print(i)
+        binarySearch(N, arr, i)
 
-    arr = [0] * (N + 1)     # N+1로 만들어 주기
-
-    cnt = 1       # 0 말구 1부터 시작
-    inorder(1)    # 중위순회 하면 오름차순으로 정렬된 값을 얻을 수 있다.
-
-    print(f'#{tc} {arr[1]} {arr[N//2]}')
+    print(f'#{tc} {cnt}')
