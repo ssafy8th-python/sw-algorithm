@@ -1,32 +1,25 @@
-import sys
-sys.stdin=open("ruins.txt", "r")
+def prim() :
+    U = []
+    D = [1000000] * (N+1)
+    D[0] = 0
+    while len(U) < N+1 :
+        # D에서 최소를 구한다.(단. U에 포함되지 않은 것을 대상으로)
+        minV = 1000000
+        for i in range(N+1) :
+            if i in U : continue
+            if minV > D[i] :
+                minV = D[i]
+                curV = i
+
+        U.append(curV)
+        # i와 연결된 정점들의 D를 업데이트
+        for i in range(N+1) :
+            if i in U : continue
+            if G[curV][i] and D[i] > G[curV][i] :
+                D[i] = G[curv][i]
+                P[i] =
 
 
-T = int(input())
-for tc in range(1, T + 1):
-    N, M = map(int, input().split())
-    arr = [list(map(int, input().split())) for _ in range(N)]
-
-    maxV = 0
-
-    for row in range(N):
-        cnt = 0
-        for col in range(M):
-            if arr[row][col] == 1:
-                cnt += 1
-                if cnt > maxV:
-                    maxV = cnt
-            else:
-                cnt = 0
-
-    for col in range(M):
-        cnt = 0
-        for row in range(N):
-            if arr[row][col] == 1:
-                cnt += 1
-                if cnt > maxV:
-                    maxV = cnt
-            else:
-                cnt = 0
-
-    print(f'#{tc} {maxV}')
+N, E = map(int, input().split())
+G = [[0] for _ in range(N+1)]
+for i in range(E) :
