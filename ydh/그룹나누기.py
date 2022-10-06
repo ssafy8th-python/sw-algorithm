@@ -9,10 +9,10 @@ def find(x):
 def union(a, b):
     a = find(a)
     b = find(b)
-    # if a < b:
-    parent[b] = a
-    # else:
-    #     parent[a] = b
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
 
 T = int(input())
 
