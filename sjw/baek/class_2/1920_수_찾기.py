@@ -30,7 +30,7 @@
 # for i in M_lst:
 #     print(binary(N_lst, N, i))
 
-# 다른 풀이
+# # 다른 풀이
 N = int(input())
 N_set = set(map(int, input().split()))
 M = int(input())
