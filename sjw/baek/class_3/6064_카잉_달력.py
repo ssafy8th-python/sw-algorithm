@@ -19,3 +19,34 @@ for _ in range(t):
     m, n, x, y = map(int, input().split())
 
     print(cain(m, n, x, y))
+
+
+# 다른 답
+import sys;
+
+R = sys.stdin.readline
+from math import gcd
+
+
+def euc(a, b, c):
+    if not a:
+        return 0, c // b
+    if not b:
+        return c // a, 0
+    if a < b:
+        q, r = divmod(b, a)
+        s, t = euc(a, r, c)
+        return s - t * q, t
+    q, r = divmod(a, b)
+    s, t = euc(r, b, c)
+    return s, t - s * q
+
+
+for _ in range(int(R())):
+    m, n, x, y = map(int, R().split())
+    g = gcd(m, n)
+    if (y - x) % g:
+        print(-1)
+        continue
+    p, q = euc(m, n, y - x)
+    print(p % (n // g) * m + x)
