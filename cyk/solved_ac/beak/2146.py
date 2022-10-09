@@ -51,7 +51,10 @@ for i in range(N):
             bfs1(i, j, color)
             color += 1
 
-for i in range(1, color):
+for lst in arr:
+    print(lst)
+
+for i in range(1, color):   # 각각의 섬들 출발
     bfs2(i)
 
 print(res)
