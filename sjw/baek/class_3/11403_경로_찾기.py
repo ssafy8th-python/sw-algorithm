@@ -1,7 +1,7 @@
 # 11403 경로 찾기
 # 주소: https://www.acmicpc.net/problem/11403
 
-# 제출한 답
+# 제출한 답 552ms
 import sys
 from collections import deque
 input = sys.stdin.readline
@@ -41,7 +41,7 @@ for result in results:
     print(*result)
 
 
-# 수정한 답
+# 수정한 답 3048ms
 import sys
 from collections import deque
 input = sys.stdin.readline
