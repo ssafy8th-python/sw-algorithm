@@ -1,6 +1,6 @@
 # n 개 중 r개를 선택하는 순열     nPr
 
-input_data = [1, 2, 3, 4, 5, 6]
+input_data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 
 def f(lst, r, c):
@@ -20,5 +20,5 @@ lst = [0] * len(input_data)
 
 used = [False] * len(input_data)
 
-f(lst, 0, 3)
+f(lst, 0, 9)
 
