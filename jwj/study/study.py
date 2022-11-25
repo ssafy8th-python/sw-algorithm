@@ -50,17 +50,17 @@
 # # 0 0 0 0 1 0   index : 2
 # # 0 0 0 1 0 0
 #
-# arr = [3, 6, 7, 1, 5, 4]
-#
-# n = len(arr)
-#
-# for i in range(1 << n):
-#     for j in range(n):
-#         if i & (1 << j):
-#             print(arr[j], end=', ')
-#
-#     print()
-# print()
+arr = [3, 6, 7, 1, 5, 4]
+
+n = len(arr)
+
+for i in range(1 << n):
+    for j in range(n):
+        if i & (1 << j):
+            print(arr[j], end=', ')
+
+    print()
+print()
 
 # print(1 << 0)
 
@@ -125,28 +125,28 @@
 
 # ================찾으면 패턴의 시작위치를 return 못찾으면 -1을 return 하는 함수================
 
-
-def find(t, p):
-    i = j = 0
-
-    while i < N and j < M:
-        if t[i] != p[j]:
-            i = i - j + 1
-            j = 0
-        else:
-            i += 1
-            j += 1
-
-    if j == M:
-        return i - M
-    else:
-        return -1
-
-
-t = 'a patern matching algorithm test'
-p = 'rithm'
-N = len(t)
-M = len(p)
-
-print(find(t, p))
-
+#
+# def find(t, p):
+#     i = j = 0
+#
+#     while i < N and j < M:
+#         if t[i] != p[j]:
+#             i = i - j + 1
+#             j = 0
+#         else:
+#             i += 1
+#             j += 1
+#
+#     if j == M:
+#         return i - M
+#     else:
+#         return -1
+#
+#
+# t = 'a patern matching algorithm test'
+# p = 'rithm'
+# N = len(t)
+# M = len(p)
+#
+# print(find(t, p))
+#
