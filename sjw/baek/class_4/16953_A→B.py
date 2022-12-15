@@ -47,3 +47,23 @@ A, B = map(int, input().split())
 minV = -1
 dp(B, 1)
 print(minV)
+
+
+# 다른 답
+a, b = map(int, input().split())
+cnt = 0
+
+while True:
+  if b % 2 == 0:    # 두 가지 경우가 공존할 수 없으니 가능한 방법
+    b /= 2
+  else:
+    b -= 1
+    b /= 10
+  cnt += 1
+  if b <= a:
+    break
+
+if b < a:
+  print(-1)
+else:
+  print(cnt + 1)
