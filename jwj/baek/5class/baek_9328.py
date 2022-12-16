@@ -28,14 +28,19 @@ for _ in range(T):
                 enters.append((col, i))
                 key.append(char)
                 tmp_char = chr(ord(char) - 32)
-                for gate, index in enumerate(gates):
+                tmp_index = []
+                for index, gate in enumerate(gates):
                     if tmp_char == gate[0]:
                         enters.append((gate[1], gate[2]))
-                        gates.pop(index)
+                        tmp_index.append(index)
+                cnt = 0
+                for index in tmp_index:
+                    gates.pop(index - cnt)
+                    cnt += 1
             elif char == '$':
                 enters.append((col, i))
                 result += 1
-            else:
+            elif 65 <= ord(char) <= 90:
                 gates.append((char, col, i))
     # 양 옆
     for row in (0, w-1):
@@ -52,14 +57,19 @@ for _ in range(T):
                 enters.append((i, row))
                 key.append(char)
                 tmp_char = chr(ord(char) - 32)
-                for gate, index in enumerate(gates):
+                tmp_index = []
+                for index, gate in enumerate(gates):
                     if tmp_char == gate[0]:
                         enters.append((gate[1], gate[2]))
-                        gates.pop(index)
+                        tmp_index.append(index)
+                cnt = 0
+                for index in tmp_index:
+                    gates.pop(index - cnt)
+                    cnt += 1
             elif char == '$':
                 enters.append((i, row))
                 result += 1
-            else:
+            elif 65 <= ord(char) <= 90:
                 gates.append((char, i, row))
 
     while enters:
@@ -81,12 +91,19 @@ for _ in range(T):
                     enters.append((n_x, n_y))
                     key.append(char)
                     tmp_char = chr(ord(char) - 32)
+
+                    tmp_index = []
                     for index, gate in enumerate(gates):
                         if tmp_char == gate[0]:
                             enters.append((gate[1], gate[2]))
-                            gates.pop(index)
+                            tmp_index.append(index)
+                    cnt = 0
+                    for index in tmp_index:
+                        gates.pop(index-cnt)
+                        cnt += 1
+
                 elif chr(ord(char) + 32) in key:
                     enters.append((n_x, n_y))
-                else:
+                elif 65 <= ord(char) <= 90:
                     gates.append((char, n_x, n_y))
     print(result)
