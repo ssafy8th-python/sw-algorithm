@@ -5,43 +5,30 @@ N, M = map(int, input().split())
 
 bee = [[1] * N for _ in range(N)]
 
+growth = [0] * (2 * N - 1)
+
 for _ in range(M):
-    growth = list(map(int, input().split()))
+    z, o, t = list(map(int, input().split()))
 
-    x = N - 1
-    y = 1
+    for i in range(z, z + o):
+        growth[i] += 1
 
-    for i in range(3):
-        for _ in range(growth[i]):
-            if i:
-                if x != -1:
-                    bee[x][0] += i
-                    x -= 1
-                else:
-                    bee[0][y] += i
-                    y += 1
-            else:
-                if x != -1:
-                    x -= 1
-                else:
-                    y += 1
+    for i in range(z + o, z + o + t):
+        growth[i] += 2
 
-    for i in range(1, N):
+index = 0
+for i in range(N-1, -1, -1):
+    bee[i][0] += growth[index]
+    index += 1
 
-        # 아래 방향으로 확인
-        n_y = [i, i - 1, i - 1]
-        for j in range(i, N):
-            for index, tx in enumerate((-1, -1, 0)):
-                n_x = tx + j
-                bee[j][i] = max(bee[j][i], bee[n_x][n_y[index]])
+for i in range(1, N):
+    bee[0][i] += growth[index]
+    index += 1
 
-        # 오른쪽 방향으로 확인
-        n_x = [i - 1, i - 1, i]
-        for j in range(i, N):
-            for index, ty in enumerate((0, -1, -1)):
-                n_y = ty + j
-                bee[i][j] = max(bee[i][j], bee[n_x[index]][n_y])
 
+for i in range(1, N):
+    for j in range(1, N):
+        bee[i][j] = bee[0][j]
 
 for b in bee:
     print(*b)
