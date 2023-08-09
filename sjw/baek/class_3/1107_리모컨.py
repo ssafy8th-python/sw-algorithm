@@ -1,4 +1,4 @@
-# 1107 리코컨
+# 1107 리모컨
 # 주소: https://www.acmicpc.net/problem/1107
 
 # 제출한 답
